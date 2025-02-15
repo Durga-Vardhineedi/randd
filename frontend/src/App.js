@@ -25,9 +25,26 @@ import LoginInstCoordinator from './pages/instcorlogin';
 import InstCoSidebar from './pages/instcorsidebar';
 import InstituteCorViewPublications from './pages/instviewpub';
 import ConsultancyForm from './pages/addconsultant';
-import ResearchForm from './pages/addresearch';
-import Viewscholars from './pages/viewresearch';
 import InstCorViewPatents from './pages/instviewpatents';
+import ResearchForm from './pages/addscholar';
+import Viewscholars from './pages/viewscholar';
+import ConsultancyProjectsPage from './pages/viewconsultant';
+import EditSeedMoney from './pages/editseedmoney';
+import ProposalForm from './pages/addproposal';
+import ViewProposals from './pages/viewproposals';
+import Editscholars from './pages/editscholars';
+import CorSeedMoney from './pages/depcorviewseed';
+import CorFundedProjects from './pages/depcorviewprojects';
+import DepConsultancyProjectsPage from './pages/depcorviewconsltancy';
+import CorViewScholars from './pages/depcorviewscholars';
+import CorViewProposals from './pages/depcorviewproposals';
+import InstSeedMoney from './pages/instviewseedmoney';
+import InstFundedProjects from './pages/instviewprojects';
+import InstViewConsultancy from './pages/instviewconsultancy';
+import InstViewScholars from './pages/instviewscholars';
+import InstViewProposals from './pages/instviewproposals';
+import EditFundedProjectPage from './pages/editexternal';
+import EditConsultancyProject from './pages/editconsultancy';
 const App = () => {
   return (
     <Router>
@@ -56,9 +73,26 @@ const App = () => {
           <Route path="/instcorsidebar" element={<InstCoSidebar/>}/>
           <Route path="/instcorviewpublications" element={<InstituteCorViewPublications/>}/>
           <Route path="/addconsultant" element={<ConsultancyForm/>}/>
-          <Route path="/addscholar" element={<ResearchForm/>}/>
-          <Route path="/viewscholars" element={<Viewscholars/>}/>
           <Route path="/instcorviewpatents" element={<InstCorViewPatents/>}/>
+          <Route path="/addscholar" element= {<ResearchForm/>}/>
+          <Route path="/viewscholars" element={<Viewscholars/>}/>
+          <Route path="/viewconsultants" element={<ConsultancyProjectsPage/>}/>
+          <Route path="/editseedmoney" element={<EditSeedMoney/>}/>
+          <Route path="/addproposal" element={<ProposalForm/>}/>
+          <Route path="/viewproposals" element={<ViewProposals/>}/>
+          <Route path="/editscholar" element ={<Editscholars/>}/>
+          <Route path="/corviewseedmoney" element={<CorSeedMoney/>}/>
+          <Route path="/corviewprojects" element={<CorFundedProjects/>}/>
+          <Route path="/corviewconsultants" element={<DepConsultancyProjectsPage/>}/>
+          <Route path="/corviewscholars" element={<CorViewScholars/>}/>
+          <Route path="/corviewproposals" element={<CorViewProposals/>}/>
+          <Route path="/instcorviewseedmoney" element={<InstSeedMoney/>}/>
+          <Route path="/instcorviewprojects" element={<InstFundedProjects/>}/>
+          <Route path="/instcorviewconsultants" element={<InstViewConsultancy/>}/>
+          <Route path="/instcorviewscholars" element={<InstViewScholars/>}/>
+          <Route path="/instcorviewproposals" element={<InstViewProposals/>}/>
+          <Route path="/editexternal" element={<EditFundedProjectPage/>}/>
+          <Route path="/editconsultancy" element={<EditConsultancyProject/>}/>
         </Routes>
       </Layout>
     </Router>
