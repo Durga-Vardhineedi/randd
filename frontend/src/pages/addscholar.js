@@ -284,7 +284,7 @@ return (
 
         <div className="row">
           <div className="col-md-6 mb-3">
-            <label>Any Fellowship/Scholarship received<span style={{ color: "red" }}>*</span></label>
+            <label>Any Fellowship/Scholarship received</label>
             <input type="text" name="fellowship" className="form-control" value={formData.fellowship} onChange={handleChange} />
             {errors.fellowship && <div className="text-danger">{errors.fellowship}</div>}
           </div>
