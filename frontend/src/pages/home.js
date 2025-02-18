@@ -90,7 +90,7 @@ const HomePage = () => {
                       ))}
                     </Pie>
                     <Tooltip formatter={(value) => `${value} Records`} />
-                    <Legend layout="horizontal" align="center" verticalAlign="bottom" />
+                    <Legend layout="horizontal" align="center" verticalAlign="bottom" iconSize={8}/>
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
