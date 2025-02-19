@@ -228,7 +228,7 @@ const handleSubmit = async (e) => {
   
   return (
     <div className="container mt-2">
-      <h2 className="text-center text-dark mb-4">Add Publication Details</h2>
+      <h2 className="text-center text-dark mb-4">Add Publication</h2>
       <form onSubmit={handleSubmit}>
         {/* Row 1 - Nature of Publication and Type of Publication */}
         <div className="row">
