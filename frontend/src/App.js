@@ -100,7 +100,7 @@ const App = () => {
           <Route path="/editproposal" element={<EditProposal/>}/>
           <Route path="/profile" element={<FacultyDetails/>}/>
           <Route path="/editprofile" element={<EditFacultyDetails/>}/>
-          <Route path="/instdashboard" element={<InstituteDashboard/>}/>
+          <Route path="/instcorwelcome" element={<InstituteDashboard/>}/>
         </Routes>
       </Layout>
     </Router>

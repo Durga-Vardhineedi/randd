@@ -19,7 +19,7 @@ const ViewProposals = () => {
                 const data = await response.json();
                 setProposals(data);
             } catch (err) {
-                console.log(err.message);
+               console.log(err.message);
             } 
         };
 
@@ -55,6 +55,7 @@ const ViewProposals = () => {
             alert("Failed to delete the project proposal.");
         }
     };
+   
 
     return (
         <div className="container mt-2">

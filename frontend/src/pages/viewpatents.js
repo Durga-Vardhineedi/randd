@@ -77,7 +77,8 @@ const PatentsPage = () => {
                                             {pat.inventionTitle}
                                         </a>
                                     </h5>
-                                    <div className='d-flex gap-2'>
+                                    <div className="d-flex gap-2">
+                                    
                                     {pat.status === 'Rejected by Department R&D Coordinator' && (
                                                 <button
                                                     className="btn btn-warning mt-2"
@@ -99,7 +100,6 @@ const PatentsPage = () => {
                                             </button>
                                             </div>
                                             </div>
-
                                     <div className="text-right">
                                             <strong>Status:</strong>
                                             <span className="text-dark ms-2">{pat.status}</span>

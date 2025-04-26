@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const CorViewScholars = () => {
     const [scholars, setScholars] = useState([]);
-    const [visibleDetails, setVisibleDetails] = useState(null);
+    const [visibleDetails, setVisibleDetails] = useState(null);    
+
     const coordinator_id = sessionStorage.getItem("coordinatorid"); // Updated from faculty_id
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const CorViewScholars = () => {
                 setScholars(data);
             } catch (err) {
                 console.log(err.message);
-            } 
+            }
         };
 
         fetchScholars();
@@ -26,6 +27,8 @@ const CorViewScholars = () => {
     const handleToggleDetails = (id) => {
         setVisibleDetails(visibleDetails === id ? null : id);
     };
+
+
     return (
         <div className="container mt-2">
             <h2 className="text-center text-dark mb-4">Department-Wise Research Scholars</h2>

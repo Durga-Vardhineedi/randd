@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 const InstViewScholars = () => {
     const [scholars, setScholars] = useState([]);
     const [visibleDetails, setVisibleDetails] = useState(null);
-
     useEffect(() => {
         const fetchScholars = async () => {
             try {
@@ -25,6 +24,8 @@ const InstViewScholars = () => {
     const handleToggleDetails = (id) => {
         setVisibleDetails(visibleDetails === id ? null : id);
     };
+
+
 
     return (
         <div className="container mt-2">

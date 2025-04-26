@@ -236,8 +236,6 @@ app.get('/api/stats/:facultyId', async (req, res) => {
       total_consultancy: 'SELECT COUNT(*) AS count FROM consultancy_projects WHERE faculty_id = ?',
       total_scholar: 'SELECT COUNT(*) AS count FROM research WHERE faculty_id = ?',
       total_proposal: 'SELECT COUNT(*) AS count FROM proposals WHERE faculty_id = ?',
-      
-
     };
   
     try {
@@ -263,9 +261,6 @@ app.get('/api/stats/:facultyId', async (req, res) => {
         total_consultancy:stats[4],
         total_scholar:stats[5],
         total_proposal:stats[6],
-
-
-
       };
   
       res.json(response);
@@ -327,12 +322,11 @@ app.get('/api/stats/:facultyId', async (req, res) => {
     });
   });
   
- 
   app.put('/updatefacultyprofile/:facultyId', (req, res) => {
     const facultyId = req.params.facultyId;
     let updatedData = req.body;
 
-    delete updatedData.facultyId; // Remove facultyId from the update data
+    delete updatedData.facultyId; // Remove facultyId from update data
 
     // Convert empty strings and undefined values to NULL
     Object.keys(updatedData).forEach((key) => {
@@ -345,8 +339,16 @@ app.get('/api/stats/:facultyId', async (req, res) => {
 
     // Format 'date_of_joining_svecw' correctly
     if (updatedData.date_of_joining_svecw) {
-        const dateOfJoining = new Date(updatedData.date_of_joining_svecw);
-        updatedData.date_of_joining_svecw = dateOfJoining.toISOString().split('T')[0];
+        updatedData.date_of_joining_svecw = new Date(updatedData.date_of_joining_svecw)
+            .toISOString()
+            .split('T')[0]; // Extract YYYY-MM-DD
+    }
+
+    // ✅ Fix 'phd_registration_date' Formatting
+    if (updatedData.phd_registration_date) {
+        updatedData.phd_registration_date = new Date(updatedData.phd_registration_date)
+            .toISOString()
+            .split('T')[0]; // Extract YYYY-MM-DD
     }
 
     // Execute the SQL query
@@ -359,8 +361,9 @@ app.get('/api/stats/:facultyId', async (req, res) => {
         }
     });
 });
-  
-app.post("/addPublication", upload.single("proofOfPublication"), (req, res) => {
+
+
+ app.post("/addPublication", upload.single("proofOfPublication"), (req, res) => {
     const {
         faculty_id,
         natureOfPublication,
@@ -431,7 +434,6 @@ app.post("/addPublication", upload.single("proofOfPublication"), (req, res) => {
         res.status(200).send("Publication added successfully");
     });
 });
-
 
 app.get("/getPublications/:faculty_id", (req, res) => {
     const faculty_id = req.params.faculty_id;
@@ -583,7 +585,8 @@ app.delete('/deletePublication/:id', async (req, res) => {
         res.status(500).send('Failed to delete publication');
     }
 });
-  
+
+
 // Route to add patent with file upload
 app.post("/addPatent", upload.single('proofOfPatent'), (req, res) => {
     const {
@@ -786,7 +789,6 @@ app.put('/update-patent/:id', upload.single('proofOfPatent'), (req, res) => {
         });
     });
 });
-
 app.delete('/deletePatent/:id', async (req, res) => {
     const patentId = req.params.id;
     try {
@@ -934,7 +936,6 @@ app.put('/updateseedmoney/:id', upload.array('proof'), (req, res) => {
         );
     });
 });
-
 app.delete('/deleteSeedmoney/:id', async (req, res) => {
     const seedMoneyId = req.params.id;
     try {
@@ -1028,6 +1029,7 @@ app.put("/updateFundedProject/:id", (req, res) => {
     });
 });
 
+
 app.delete('/deletefundedproject/:id', async (req, res) => {
     const externalId = req.params.id;
     try {
@@ -1117,6 +1119,7 @@ app.delete('/deleteConsultancy/:id', async (req, res) => {
         res.status(500).send('Failed to delete Consultancy');
     }
 });
+
   
 app.post("/addResearch", upload.fields([
     { name: "admissionLetter", maxCount: 1 },
@@ -1202,7 +1205,6 @@ app.put("/updatescholar/:id", upload.fields([
         res.json({ message: "Scholar updated successfully", result });
     });
 });
-
 app.delete('/deleteScholar/:id', async (req, res) => {
     const id = req.params.id;
     try {
@@ -1265,23 +1267,39 @@ app.get('/getProposals/:faculty_id', async (req, res) => {
 // Update Proposal
 app.put('/updateProposal/:id', (req, res) => {
     const { id } = req.params;
-    const { referenceNumber,agencyScheme,submissionYear,submissionDate,piName,piDepartment,piDesignation,piPhone,piEmail,projectTitle,
-        amountRequested,projectStatus
-     } = req.body;
+    const { 
+        referenceNumber, agencyScheme, submissionYear, submissionDate, piName, piDepartment, piDesignation, 
+        piPhone, piEmail, projectTitle, amountRequested, projectStatus 
+    } = req.body;
 
-     const updateFields={
-        referenceNumber,agencyScheme,submissionYear,submissionDate,piName,piDepartment,piDesignation,piPhone,piEmail,projectTitle,
-        amountRequested,projectStatus
-     };
+    // Convert empty or undefined numeric fields to NULL
+    const convertToNull = (value) => (value === "" || value === undefined || isNaN(value) ? null : value);
+
+    const updateFields = {
+        referenceNumber,
+        agencyScheme,
+        submissionYear,
+        submissionDate,
+        piName,
+        piDepartment,
+        piDesignation,
+        piPhone,
+        piEmail,
+        projectTitle,
+        amountRequested: convertToNull(amountRequested),
+        projectStatus
+    };
+
     const sql = `UPDATE proposals SET ? WHERE id = ?`;
     db.query(sql, [updateFields, id], (err, result) => {
-        if (err){
-            console.error("Error updating Proposal:",err);
-            return res.status(500).json({error:err.message});
-        } 
-        res.json({message:"Proposal updated successfully",result});
+        if (err) {
+            console.error("Error updating Proposal:", err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.json({ message: "Proposal updated successfully", result });
     });
 });
+
 
 app.delete('/deleteproposal/:id', async (req, res) => {
     const id = req.params.id;
@@ -1293,7 +1311,6 @@ app.delete('/deleteproposal/:id', async (req, res) => {
         res.status(500).send('Failed to delete Proposal');
     }
 });
-
 
 app.post('/coordinatorlogin', (req, res) => {
     const { coordinatorid, password1, department } = req.body;
@@ -1383,7 +1400,6 @@ app.post('/coordinatorlogin', (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
-
   app.get('/getAllPublications', (req, res) => {
     const coordinatorId = req.query.coordinatorid;  // Get coordinatorId from the request query
 
@@ -1865,7 +1881,7 @@ app.post("/institute_coordinator_login", (req, res) => {
       res.json({ success: true, coordinatorid: result[0].coordinatorid });
     });
   });
-
+  
   app.get('/api/stats/institute/:instituteId', async (req, res) => {
     const { instituteId } = req.params;
 
@@ -1931,7 +1947,6 @@ app.post("/institute_coordinator_login", (req, res) => {
     }
 });
 
-  
   app.get("/getAllPublicationsOfInst", (req, res) => {
     const sql = `
         SELECT * FROM publications 

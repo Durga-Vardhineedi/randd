@@ -4,7 +4,6 @@ const InstViewProposals = () => {
     const [proposals, setProposals] = useState([]);
     const [visibleDetails, setVisibleDetails] = useState(null);
 
-
     useEffect(() => {
         const fetchProposals = async () => {
             try {
@@ -17,7 +16,7 @@ const InstViewProposals = () => {
                 setProposals(data);
             } catch (err) {
                 console.log(err.message);
-            }
+            } 
         };
 
         fetchProposals();
@@ -26,6 +25,7 @@ const InstViewProposals = () => {
     const handleToggleDetails = (id) => {
         setVisibleDetails(visibleDetails === id ? null : id);
     };
+
 
     return (
         <div className="container mt-2">

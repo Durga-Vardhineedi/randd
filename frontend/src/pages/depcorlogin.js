@@ -91,8 +91,8 @@ const LoginCorPage = () => {
             <option value="cse">COMPUTER SCIENCE AND ENGINEERING</option>
             <option value="ai">ARTIFICIAL INTELLIGENCE</option>
             <option value="cs">CYBER SECURITY</option>
-            <option value="ece">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
-            <option value="eee">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+            <option value="ece">ELECTRICAL AND ELECTRONICS ENGINEERING</option>
+            <option value="eee">ELECTRONICS AND COMMUNICATION ENGINEERING</option>
             <option value="civil">CIVIL ENGINEERING</option>
             <option value="it">INFORMATION TECHNOLOGY</option>
             <option value="me">MECHANICAL ENGINEERING</option>

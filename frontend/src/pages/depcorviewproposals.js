@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const CorViewProposals = () => {
     const [proposals, setProposals] = useState([]);
-    const [visibleDetails, setVisibleDetails] = useState(null)
+    const [visibleDetails, setVisibleDetails] = useState(null);
+  
 
     // Get the coordinator ID from session storage
     const coordinator_id = sessionStorage.getItem("coordinatorid");
@@ -29,6 +30,7 @@ const CorViewProposals = () => {
         setVisibleDetails(visibleDetails === id ? null : id);
     };
 
+  
 
     return (
         <div className="container mt-2">
